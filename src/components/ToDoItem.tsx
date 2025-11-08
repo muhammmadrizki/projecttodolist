@@ -3,8 +3,13 @@ import type { Todo } from "../types/Todo";
 type TodoItemProps = {
   todo: Todo;
   onToggleComplete: (id: number) => void;
+  onDelete: (id: number) => void;
 };
-export const TodoItem = ({ todo, onToggleComplete }: TodoItemProps) => {
+export const TodoItem = ({
+  todo,
+  onToggleComplete,
+  onDelete,
+}: TodoItemProps) => {
   const { text, completed } = todo;
 
   return (
@@ -15,13 +20,16 @@ export const TodoItem = ({ todo, onToggleComplete }: TodoItemProps) => {
     >
       <span
         onClick={() => onToggleComplete(todo.id)}
-        className={`cursor-pointer ${
+        className={`cursor-pointer flex-1 ${
           completed ? "text-gray-600" : "todo-gray-800"
         }`}
       >
         {text}
       </span>
-      <button className="text-red-500 hover:text-red-600 transition-all">
+      <button
+        onClick={() => onDelete(todo.id)}
+        className="ml-4 text-red-500 hover:text-red-600 transition-all"
+      >
         Delete
       </button>
     </li>
