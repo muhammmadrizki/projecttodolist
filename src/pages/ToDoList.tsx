@@ -25,6 +25,14 @@ export function Todo() {
     };
     setTodos((prevTodos) => [...prevTodos, todo]);
   };
+
+  const handleToggleComplete = (id: number) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-teal-500">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
@@ -34,7 +42,11 @@ export function Todo() {
         <TodoInput addTodo={addTodo} />
         <ul className="space-y-4">
           {todos.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} />
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onToggleComplete={handleToggleComplete}
+            />
           ))}
         </ul>
       </div>

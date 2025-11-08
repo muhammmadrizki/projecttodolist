@@ -2,18 +2,20 @@ import type { Todo } from "../types/Todo";
 
 type TodoItemProps = {
   todo: Todo;
+  onToggleComplete: (id: number) => void;
 };
-export const TodoItem = ({ todo }: TodoItemProps) => {
+export const TodoItem = ({ todo, onToggleComplete }: TodoItemProps) => {
   const { text, completed } = todo;
 
   return (
     <li
-      className={`flex items-center justify-between p-4 rounded-lg shadow-md${
+      className={`flex items-center justify-between p-4 rounded-lg shadow-md ${
         completed ? "bg-gray-200 line-through" : "bg-teal-300"
       }`}
     >
       <span
-        className={`cursor-pointe ${
+        onClick={() => onToggleComplete(todo.id)}
+        className={`cursor-pointer ${
           completed ? "text-gray-600" : "todo-gray-800"
         }`}
       >
