@@ -1,5 +1,10 @@
-export const TodoItem = () => {
-  const completed: boolean = true;
+import type { Todo } from "../types/Todo";
+
+type TodoItemProps = {
+  todo: Todo;
+};
+export const TodoItem = ({ todo }: TodoItemProps) => {
+  const { text, completed } = todo;
 
   return (
     <li
@@ -12,7 +17,7 @@ export const TodoItem = () => {
           completed ? "text-gray-600" : "todo-gray-800"
         }`}
       >
-        Todo Item
+        {text}
       </span>
       <button className="text-red-500 hover:text-red-600 transition-all">
         Delete
